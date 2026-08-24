@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
+  "name": "rnxo-portfolio",
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
@@ -10,7 +10,7 @@
     {
       "binding": "DB",
       "database_name": "my-dev-arcticle-db",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "database_id": "1c299a36-7db8-45b9-abc4-fd0bc05619da",
       "migrations_dir": "migrations",
     },
   ],
