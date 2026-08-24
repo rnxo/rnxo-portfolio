@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import  ProjectCard  from '#/components/about-me/ProjectCard';
 
 export const Route = createFileRoute('/about')({
   component: About,
@@ -22,7 +23,7 @@ type Project = {
   name: string
   description: string
   url: string
-  language?: string
+  techs?: string[]
 }
 
 const projects: Project[] = [
@@ -31,27 +32,27 @@ const projects: Project[] = [
     description:
       '自己肯定感をあげるためだけに無駄に演出がいいカウンターアプリ。',
     url: `${GITHUB_URL}/ore-sugee-counter`,
-    language: 'TypeScript',
+    techs: ['TypeScript', 'Next.js'],
   },
   {
     name: 'todo-app-vite',
     description: '私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。',
     url: `${GITHUB_URL}/todo-app-vite`,
-    language: 'JavaScript',
+    techs: ['JavaScript', 'vite'],
   },
   {
     name: 'コンビニトイレマップ (Hackathon)',
     description:
       '周辺のコンビニのトイレの有無と詳細を共有・閲覧できる便利アプリ',
     url: 'https://github.com/Neptune-Progate-Hackathon-AWS/front',
-    language: 'TypeScript',
+    techs: ['TypeScript', 'Vite+', 'AWS'],
   },
     {
     name:'Lumi',
     description:
       'AI搭載型のペットがユーザに最適化されたアドバイスによって習慣化をサポート!!',
     url: 'https://github.com/lumi-app-project',
-    language: 'TypeScript',
+    techs: ['TypeScript', 'Next.js', 'Supabase'],
   },
 ]
 
@@ -95,26 +96,18 @@ function About() {
           ))}
         </div>
       </section>
-
       <section className="mt-10">
         <p className="island-kicker mb-3">Projects</p>
+        { /* プロジェクトカード */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
-            <a
+            <ProjectCard
               key={project.name}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="feature-card rise-in flex flex-col gap-3 rounded-2xl border p-5 no-underline"
-            >
-              <h2 className="display-title text-xl font-bold text-[var(--sea-ink)]">
-                {project.name}
-              </h2>
-              <p className="demo-muted text-sm">{project.description}</p>
-              {project.language && (
-                <span className="demo-pill w-fit">{project.language}</span>
-              )}
-            </a>
+              name={project.name}
+              description={project.description}
+              url={project.url}
+              techs={project.techs}
+            />
           ))}
         </div>
       </section>
