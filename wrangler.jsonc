@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tanstack-start-app",
+  "compatibility_date": "2025-09-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  // ローカル開発ではこのプレースホルダー値のままで動作します(wranglerがローカルSQLiteをエミュレートします)。
+  // 本番デプロイ前に `wrangler d1 create my-dev-arcticle-db` を実行し、出力された database_id に置き換えてください。
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "my-dev-arcticle-db",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "migrations",
+    },
+  ],
+  // 本番デプロイ前に `wrangler r2 bucket create my-dev-arcticle-media` を実行してください。
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "my-dev-arcticle-media",
+    },
+  ],
+}

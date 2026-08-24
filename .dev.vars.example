@@ -1,0 +1,5 @@
+# このファイルを .dev.vars にコピーして値を設定してください(.dev.vars はgit管理外です)。
+# ADMIN_PASSWORD_HASH は `node scripts/hash-password.mjs <パスワード>` で生成します。
+ADMIN_PASSWORD_HASH=
+# SESSION_SECRET は十分ランダムな文字列にしてください(例: `node -e "console.log(crypto.randomBytes(32).toString('base64url'))"`)。
+SESSION_SECRET=
