@@ -11,7 +11,7 @@ export default function Footer() {
       </div>
       <div className="mt-4 flex justify-center gap-4">
         <a
-          href="https://x.com/tan_stack"
+          href="https://x.com/skyremt211"
           target="_blank"
           rel="noreferrer"
           className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
@@ -25,7 +25,7 @@ export default function Footer() {
           </svg>
         </a>
         <a
-          href="https://github.com/TanStack"
+          href="https://github.com/rnxo"
           target="_blank"
           rel="noreferrer"
           className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
