@@ -6,5 +6,12 @@ interface AppEnv extends Env {
 }
 
 export function getEnv(): AppEnv {
-  return env as unknown as AppEnv
+  const raw = env as unknown as AppEnv
+  // wrangler secret put は入力方法によって末尾に改行/空白が混入することがあり、
+  // ADMIN_PASSWORD_HASH の場合はそれだけで検証が常に失敗するため、読み込み時に trim する。
+  return {
+    ...raw,
+    ADMIN_PASSWORD_HASH: raw.ADMIN_PASSWORD_HASH?.trim(),
+    SESSION_SECRET: raw.SESSION_SECRET?.trim(),
+  }
 }

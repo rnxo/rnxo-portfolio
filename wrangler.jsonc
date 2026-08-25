@@ -4,8 +4,9 @@
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
-  // ローカル開発ではこのプレースホルダー値のままで動作します(wranglerがローカルSQLiteをエミュレートします)。
-  // 本番デプロイ前に `wrangler d1 create my-dev-arcticle-db` を実行し、出力された database_id に置き換えてください。
+  "routes": [
+    { "pattern": "skyremt.dev", "custom_domain": true},
+  ],
   "d1_databases": [
     {
       "binding": "DB",
@@ -14,7 +15,6 @@
       "migrations_dir": "migrations",
     },
   ],
-  // 本番デプロイ前に `wrangler r2 bucket create my-dev-arcticle-media` を実行してください。
   "r2_buckets": [
     {
       "binding": "MEDIA",
