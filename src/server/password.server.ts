@@ -68,3 +68,41 @@ export async function verifyPassword(
   const derived = await deriveBits(password, salt, iterations)
   return timingSafeEqual(toHex(derived), expectedHex)
 }
+
+// login側でサーバー設定不備(ハッシュ破損・未設定)とパスワード誤入力を
+// 切り分けてログに残すための検査。平文のパスワード/ハッシュ値そのものは含めない。
+export type StoredHashInspection =
+  | {
+      valid: true
+      iterations: number
+      saltLength: number
+      hashLength: number
+    }
+  | { valid: false; reason: 'missing' | 'malformed'; length: number }
+
+export function inspectStoredHash(
+  storedHash: string | undefined,
+): StoredHashInspection {
+  if (!storedHash) {
+    return { valid: false, reason: 'missing', length: storedHash?.length ?? 0 }
+  }
+
+  const parts = storedHash.split('$')
+  if (parts.length !== 4 || parts[0] !== ALGORITHM) {
+    return { valid: false, reason: 'malformed', length: storedHash.length }
+  }
+
+  const iterations = Number(parts[1])
+  const salt = fromHex(parts[2])
+  const expectedHex = parts[3]
+  if (!Number.isFinite(iterations) || salt.length === 0 || !expectedHex) {
+    return { valid: false, reason: 'malformed', length: storedHash.length }
+  }
+
+  return {
+    valid: true,
+    iterations,
+    saltLength: salt.length,
+    hashLength: expectedHex.length,
+  }
+}
