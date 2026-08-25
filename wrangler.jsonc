@@ -13,6 +13,7 @@
       "database_name": "my-dev-arcticle-db",
       "database_id": "1c299a36-7db8-45b9-abc4-fd0bc05619da",
       "migrations_dir": "migrations",
+      "remote": true,
     },
   ],
   "r2_buckets": [
