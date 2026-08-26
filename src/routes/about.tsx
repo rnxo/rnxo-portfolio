@@ -1,23 +1,25 @@
 import { createFileRoute } from '@tanstack/react-router'
-import  ProjectCard  from '#/components/about-me/ProjectCard';
+import ProjectCard from '#/components/about-me/ProjectCard'
+import { getIntroCodeHtml } from '#/server/about.functions'
 
 export const Route = createFileRoute('/about')({
+  loader: () => getIntroCodeHtml(),
   component: About,
 })
 
 const GITHUB_URL = 'https://github.com/rnxo'
 
 const skills = [
-  'HTML5',
-  'CSS3',
-  'JavaScript',
-  'TypeScript',
-  'React',
-  'Next.js',
-  'TailwindCSS',
-];
+  'html5',
+  'css3',
+  'javascript',
+  'typescript',
+  'react',
+  'vite',
+  'nextjs',
+]
 
-const challengeSkills = [ 'Hono', 'React Native + Expo'];
+const challengeSkills = ['hono', 'express', 'expo']
 
 type Project = {
   name: string
@@ -36,7 +38,8 @@ const projects: Project[] = [
   },
   {
     name: 'todo-app-vite',
-    description: '私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。',
+    description:
+      '私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。',
     url: `${GITHUB_URL}/todo-app-vite`,
     techs: ['JavaScript', 'vite'],
   },
@@ -47,8 +50,8 @@ const projects: Project[] = [
     url: 'https://github.com/Neptune-Progate-Hackathon-AWS/front',
     techs: ['TypeScript', 'Vite+', 'AWS'],
   },
-    {
-    name:'Lumi',
+  {
+    name: 'Lumi',
     description:
       'AI搭載型のペットがユーザに最適化されたアドバイスによって習慣化をサポート!!',
     url: 'https://github.com/lumi-app-project',
@@ -57,48 +60,54 @@ const projects: Project[] = [
 ]
 
 function About() {
+  const introCodeHtml = Route.useLoaderData()
+
   return (
     <main className="page-wrap px-4 py-12">
-      <section className="island-shell rise-in flex flex-col gap-6 rounded-2xl p-6 sm:flex-row sm:items-center sm:p-8">
-        <img
-          src={`${GITHUB_URL}.png`}
-          alt="skyremt のアバター"
-          className="h-28 w-28 shrink-0 rounded-full border border-[var(--line)] object-cover sm:h-32 sm:w-32"
-          loading="lazy"
-        />
-        <div>
-          <p className="island-kicker mb-2">ABOUT ME</p>
-          <h1 className="display-title mb-3 text-4xl font-bold text-[var(--sea-ink)] sm:text-5xl">
-            skyremt (rnxo)
-          </h1>
-          <p className="m-0 max-w-2xl text-base leading-8 text-[var(--sea-ink-soft)]">
-            KCG
-            3回生。Webアプリエンジニアを志望し、フロントエンドを中心に学習しています。「自分の知らない景色を求めて」をモットーに、日々新しい技術に触れながらつよつよエンジニアを目指しています。
-          </p>
+      {/* 自己紹介カード */}
+      <section className="island-shell rise-in rounded-2xl p-6 sm:p-8">
+        <div className="flex flex-col lg:flex-row">
+          <img
+            src="./assets/my-icon.jpg"
+            className="xl:h-100 xl:w-100 sm:h-5 sm:w-5 rounded-2xl xl:rounded-full"
+          />
+          <div className="m-5">
+            <p className="island-kicker mb-2">ABOUT ME</p>
+            <h1 className="mb-3 text-4xl font-mechanic sm:text-5xl">
+              Hello I'm SKYREMT
+            </h1>
+            {/* コードブロック */}
+            <div
+              className="prose article-prose max-w-none text-sm"
+              dangerouslySetInnerHTML={{ __html: introCodeHtml }}
+            />
+          </div>
         </div>
       </section>
-
+      <hr className="border-t border-gray-300 my-6" />
       <section className="mt-10">
-        <p className="island-kicker mb-3">Skills</p>
+        {/* スキルセクション */}
+        <h2 className="mb-3 font-bold text-3xl">SKILLS</h2>
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
-            <span key={skill} className="demo-pill">
-              {skill}
-            </span>
+            <img
+              key={skill}
+              src={`./assets/${skill}.png`}
+              height={50}
+              width={50}
+            />
           ))}
         </div>
         <p className="island-kicker my-3">Challenge</p>
         <div className="flex flex-wrap gap-2">
           {challengeSkills.map((cs) => (
-            <span key={cs} className="demo-pill">
-              {cs}
-            </span>
+            <img key={cs} src={`./assets/${cs}.png`} height={50} width={50} />
           ))}
         </div>
       </section>
       <section className="mt-10">
         <p className="island-kicker mb-3">Projects</p>
-        { /* プロジェクトカード */}
+        {/* プロジェクトカード */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <ProjectCard

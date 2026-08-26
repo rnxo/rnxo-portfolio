@@ -2,10 +2,12 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 @import '@fontsource/allura';
+@import '@fontsource/orbitron';
 
 @theme {
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --font-signature: 'Allura', cursive;
+  --font-mechanic: 'Orbitron', sans-serif;
 }
 
 :root {

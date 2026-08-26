@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s --compressed http://localhost:3101/about -o 'C:\\\\Users\\\\kcinr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-kcinr-Documents-original-apps-my-dev-arcticle\\\\c8928477-4711-4782-9d7c-ea1933abbd59\\\\scratchpad/about.html')"
+    ]
+  }
+}
