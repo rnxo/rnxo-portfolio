@@ -15,14 +15,14 @@ export default function Header() {
             className="nav-link"
             activeProps={{ className: 'nav-link is-active' }}
           >
-            Blog
+            About me
           </Link>
           <Link
-            to="/about"
+            to="/blog"
             className="nav-link"
             activeProps={{ className: 'nav-link is-active' }}
           >
-            About me
+            Blog
           </Link>
         </div>
 
