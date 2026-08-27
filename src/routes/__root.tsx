@@ -59,7 +59,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
+      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,138,184,0.24)]">
         <Header />
         {children}
         <Footer />

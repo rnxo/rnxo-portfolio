@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import ProjectCard from '#/components/about-me/ProjectCard'
 import { getIntroCodeHtml } from '#/server/about.functions'
+import TypingText from '#/components/about-me/TypingText'
 
 export const Route = createFileRoute('/about')({
   loader: () => getIntroCodeHtml(),
@@ -66,19 +67,21 @@ function About() {
     <main className="page-wrap px-4 py-12">
       {/* 自己紹介カード */}
       <section className="island-shell rise-in rounded-2xl p-6 sm:p-8">
-        <div className="flex flex-col lg:flex-row">
-          <img
+        <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-8">
+          <div className="flex justify-center items-center">
+            <img
             src="/assets/my-icon.jpg"
-            className="xl:h-100 xl:w-100 sm:h-5 sm:w-5 rounded-2xl xl:rounded-full"
+            className="h-28 w-28 shrink-0 rounded-2xl object-cover sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-56 lg:w-56 xl:h-64 xl:w-64 xl:rounded-full"
           />
-          <div className="m-5">
+          </div>
+          <div className="w-full text-center lg:text-left">
             <p className="island-kicker mb-2">ABOUT ME</p>
-            <h1 className="mb-3 text-4xl font-mechanic sm:text-5xl">
-              Hello I'm SKYREMT
+            <h1 className="mb-3 text-2xl font-mechanic sm:text-3xl md:text-4xl lg:text-5xl">
+              <TypingText text="Hello, I'm SKYREMT" />
             </h1>
             {/* コードブロック */}
             <div
-              className="prose article-prose max-w-none text-sm"
+              className="prose article-prose max-w-none text-left text-sm"
               dangerouslySetInnerHTML={{ __html: introCodeHtml }}
             />
           </div>

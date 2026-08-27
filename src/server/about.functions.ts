@@ -7,7 +7,7 @@ const introCode = [
   "  name: 'skyremt',",
   "  colleague: '京都コンピュータ学院',",
   "  gole: 'フルスタックエンジニア',",
-  "  stack: ['React', 'TypeScript', 'Next.js'],",
+  "  favs-anime: ['ギルクラ', 'ダリフラ', '東京グール'],",
   "  motto: '自分の知らない景色を求めて',",
   '}',
   '',

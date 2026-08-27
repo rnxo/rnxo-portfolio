@@ -20,9 +20,9 @@ function escapeHtml(value: string): string {
 // (生成画像は静的PNGなのでライトテーマの色を固定で使う)。
 function renderOgHtml(title: string): string {
   return `
-    <div style="display:flex;flex-direction:column;justify-content:space-between;width:100%;height:100%;padding:64px;background:linear-gradient(160deg,#f3faf5,#e7f0e8);font-family:'${FONT_FAMILY}';">
-      <div style="display:flex;align-items:center;font-size:30px;font-weight:700;color:#2f6a4a;letter-spacing:4px;">${BRAND}</div>
-      <div style="display:flex;font-size:58px;font-weight:800;line-height:1.28;color:#173a40;">${escapeHtml(title)}</div>
+    <div style="display:flex;flex-direction:column;justify-content:space-between;width:100%;height:100%;padding:64px;background:linear-gradient(160deg,#f3f6fb,#e7edf5);font-family:'${FONT_FAMILY}';">
+      <div style="display:flex;align-items:center;font-size:30px;font-weight:700;color:#2f5a8a;letter-spacing:4px;">${BRAND}</div>
+      <div style="display:flex;font-size:58px;font-weight:800;line-height:1.28;color:#17293a;">${escapeHtml(title)}</div>
     </div>
   `
 }
