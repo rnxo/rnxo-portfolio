@@ -28,10 +28,20 @@ export const Route = createRootRoute({
       },
     ],
     links: [
+      { rel: 'stylesheet', href: appCss },
       {
-        rel: 'stylesheet',
-        href: appCss,
+        rel: 'icon',
+        href: '/favicon-32x32.png',
+        sizes: '32x32',
+        type: 'image/png',
       },
+      {
+        rel: 'icon',
+        href: '/favicon-16x16.png',
+        sizes: '16x16',
+        type: 'image/png',
+      },
+      { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
     ],
   }),
   notFoundComponent: NotFound,

@@ -2,12 +2,24 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 @import '@fontsource/allura';
-@import '@fontsource/orbitron';
+@import '@fontsource/bitcount-single';
 
 @theme {
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --font-signature: 'Allura', cursive;
-  --font-mechanic: 'Orbitron', sans-serif;
+  --font-mechanic: 'Bitcount Single', system-ui;
+}
+
+.text-mechanic-gradient {
+  background-image: linear-gradient(
+    102deg,
+    rgba(1, 64, 29, 1) 0%,
+    rgba(2, 99, 21, 1) 35%,
+    rgba(136, 255, 0, 1) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 :root {

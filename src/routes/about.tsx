@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import ProjectCard from '#/components/about-me/ProjectCard'
 import { getIntroCodeHtml } from '#/server/about.functions'
-import TypingText from '#/components/about-me/TypingText'
+import ScrambleText from '#/components/about-me/ScrambleText'
 
 export const Route = createFileRoute('/about')({
   loader: () => getIntroCodeHtml(),
@@ -76,8 +76,8 @@ function About() {
           </div>
           <div className="w-full text-center lg:text-left">
             <p className="island-kicker mb-2">ABOUT ME</p>
-            <h1 className="mb-3 text-2xl font-mechanic sm:text-3xl md:text-4xl lg:text-5xl">
-              <TypingText text="Hello, I'm SKYREMT" />
+            <h1 className="mb-3 text-2xl text-emerald-500 font-mechanic sm:text-3xl md:text-4xl lg:text-5xl">
+              <ScrambleText text="Hi, I'm SKYREMT" />
             </h1>
             {/* コードブロック */}
             <div

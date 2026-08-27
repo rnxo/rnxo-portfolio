@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@fontsource/allura": "^5.3.0",
-    "@fontsource/orbitron": "^5.3.0",
+    "@fontsource/bitcount-single": "^5.3.0",
     "@shikijs/langs": "^4.4.3",
     "@shikijs/rehype": "^4.4.3",
     "@shikijs/themes": "^4.4.3",

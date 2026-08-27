@@ -11,7 +11,7 @@ importers:
       '@fontsource/allura':
         specifier: ^5.3.0
         version: 5.3.0
-      '@fontsource/orbitron':
+      '@fontsource/bitcount-single':
         specifier: ^5.3.0
         version: 5.3.0
       '@shikijs/langs':
@@ -481,8 +481,8 @@ packages:
   '@fontsource/allura@5.3.0':
     resolution: {integrity: sha512-UqloNNVxl03+psvtIXCYuo7/v2mD9XmX2HGiczhK6NmDDwbFJJDjrbHZ5tpNuVXKsMEQPc46tZu3hewYN82/YA==}
 
-  '@fontsource/orbitron@5.3.0':
-    resolution: {integrity: sha512-+BhPsbUAo/AF7sRcf+TEexm+EWWkgTiR9Zwb7AhYIPkc5oplfvw0C45Oc2xlKPhwVEmxG8hHuA6/Ansbl+Bc6w==}
+  '@fontsource/bitcount-single@5.3.0':
+    resolution: {integrity: sha512-o84qxvjUij1Co7gzP7re2inPg7YH79O5SEqX6qByPfjo+9o4uqeC85jjhrU/41OIdUhAnaoJHxkAMP95zLW8hQ==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -3381,7 +3381,7 @@ snapshots:
 
   '@fontsource/allura@5.3.0': {}
 
-  '@fontsource/orbitron@5.3.0': {}
+  '@fontsource/bitcount-single@5.3.0': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
