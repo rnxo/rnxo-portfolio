@@ -11,16 +11,17 @@ export const Route = createFileRoute('/about')({
 const GITHUB_URL = 'https://github.com/rnxo'
 
 const skills = [
-  'html5',
-  'css3',
+  'html',
+  'css',
   'javascript',
   'typescript',
   'react',
   'vite',
   'nextjs',
+  'tailwindcss',
 ]
 
-const challengeSkills = ['hono', 'express', 'expo']
+const challengeSkills = ['hono', 'nodejs', 'expo']
 
 type Project = {
   name: string
@@ -30,13 +31,6 @@ type Project = {
 }
 
 const projects: Project[] = [
-  {
-    name: 'ore-sugee-counter',
-    description:
-      '自己肯定感をあげるためだけに無駄に演出がいいカウンターアプリ。',
-    url: `${GITHUB_URL}/ore-sugee-counter`,
-    techs: ['TypeScript', 'Next.js'],
-  },
   {
     name: 'todo-app-vite',
     description:
@@ -70,13 +64,13 @@ function About() {
         <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-8">
           <div className="flex justify-center items-center">
             <img
-            src="/assets/my-icon.jpg"
-            className="h-28 w-28 shrink-0 rounded-2xl object-cover sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-56 lg:w-56 xl:h-64 xl:w-64 xl:rounded-full"
-          />
+              src="/assets/my-icon.jpg"
+              className="h-28 w-28 shrink-0 rounded-2xl object-cover sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-56 lg:w-56 xl:h-64 xl:w-64 xl:rounded-full"
+            />
           </div>
           <div className="w-full text-center lg:text-left">
             <p className="island-kicker mb-2">ABOUT ME</p>
-            <h1 className="mb-3 text-2xl text-emerald-500 font-mechanic sm:text-3xl md:text-4xl lg:text-5xl">
+            <h1 className="mb-3 text-2xl text-lagoon-deep font-bit sm:text-3xl md:text-4xl lg:text-5xl">
               <ScrambleText text="Hi, I'm SKYREMT" />
             </h1>
             {/* コードブロック */}
@@ -90,26 +84,38 @@ function About() {
       <hr className="border-t border-gray-300 my-6" />
       <section className="mt-10">
         {/* スキルセクション */}
-        <h2 className="mb-3 font-bold text-3xl">SKILLS</h2>
-        <div className="flex flex-wrap gap-2">
+        <h2 className="my-5 font-mechanic text-lagoon-deep text-3xl">
+          <ScrambleText text="SKILLS" />
+        </h2>
+        <div className="flex flex-wrap gap-10">
           {skills.map((skill) => (
-            <img
-              key={skill}
-              src={`/assets/${skill}.png`}
-              height={50}
-              width={50}
-            />
+            <div className="flex flex-col items-center justify-between">
+              <img
+                key={skill}
+                src={`/assets/${skill}.png`}
+                height={50}
+                width={50}
+              />
+              <span className="text-center font-mechanic">{skill}</span>
+            </div>
           ))}
         </div>
-        <p className="island-kicker my-3">Challenge</p>
-        <div className="flex flex-wrap gap-2">
+        <h2 className="my-5 font-mechanic text-lagoon-deep text-3xl">
+          <ScrambleText text="CHALLENGE" />
+        </h2>
+        <div className="flex flex-wrap gap-10">
           {challengeSkills.map((cs) => (
-            <img key={cs} src={`/assets/${cs}.png`} height={50} width={50} />
+            <div className="flex flex-col items-center justify-center">
+              <img key={cs} src={`/assets/${cs}.png`} height={50} width={50} />
+              <span className='text-center font-mechanic'>{cs}</span>
+            </div>
           ))}
         </div>
       </section>
       <section className="mt-10">
-        <p className="island-kicker mb-3">Projects</p>
+        <h2 className="my-5 font-mechanic text-lagoon-deep text-3xl">
+          <ScrambleText text="PROJECTS" />
+        </h2>
         {/* プロジェクトカード */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (

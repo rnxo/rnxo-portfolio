@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-type TypingTextProps = {
+type ScrambleTextProps = {
   text: string
   speed?: number
   startDelay?: number
@@ -19,9 +19,9 @@ export default function ScrambleText({
   text,
   speed = 40,
   startDelay = 300,
-  cycleInterval = 5000,
+  cycleInterval = 3000,
   className,
-}: TypingTextProps) {
+}: ScrambleTextProps) {
   const [display, setDisplay] = useState(() => text.replace(/\S/g, ' '))
 
   useEffect(() => {

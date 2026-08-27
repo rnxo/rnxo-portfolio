@@ -22,7 +22,7 @@ export default function ProjectCard({
       rel="noopener noreferrer"
       className="feature-card rise-in flex flex-col gap-3 rounded-2xl border p-5 no-underline"
     >
-      <h2 className="display-title text-xl font-bold text-[var(--sea-ink)]">
+      <h2 className="display-title text-xl font-bold text-(--sea-ink)">
         {name}
       </h2>
       <p className="demo-muted text-sm">{description}</p>

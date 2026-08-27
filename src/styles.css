@@ -3,11 +3,19 @@
 @plugin "@tailwindcss/typography";
 @import '@fontsource/allura';
 @import '@fontsource/bitcount-single';
+@import '@fontsource/orbitron';
 
+/* フォントCSS変数 */
 @theme {
   --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --font-signature: 'Allura', cursive;
-  --font-mechanic: 'Bitcount Single', system-ui;
+  --font-bit: 'Bitcount Single', system-ui;
+  --font-mechanic: 'Orbitron', sans-serif;
+}
+
+/* アプリ配色用CSS変数 */
+@theme {
+  --color-lagoon-deep: var(--lagoon-deep);
 }
 
 .text-mechanic-gradient {
@@ -209,7 +217,7 @@ pre code {
 .feature-card {
   background: linear-gradient(
     165deg,
-    color-mix(in oklab, var(--surface-strong) 93%, white 7%),
+    color-mix(in oklab, var(--surface-strong) 93%, rgb(74, 255, 14) 7%),
     var(--surface)
   );
   box-shadow:
