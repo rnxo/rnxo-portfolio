@@ -68,7 +68,7 @@ function About() {
       <section className="island-shell rise-in rounded-2xl p-6 sm:p-8">
         <div className="flex flex-col lg:flex-row">
           <img
-            src="./assets/my-icon.jpg"
+            src="/assets/my-icon.jpg"
             className="xl:h-100 xl:w-100 sm:h-5 sm:w-5 rounded-2xl xl:rounded-full"
           />
           <div className="m-5">
@@ -92,7 +92,7 @@ function About() {
           {skills.map((skill) => (
             <img
               key={skill}
-              src={`./assets/${skill}.png`}
+              src={`/assets/${skill}.png`}
               height={50}
               width={50}
             />
@@ -101,7 +101,7 @@ function About() {
         <p className="island-kicker my-3">Challenge</p>
         <div className="flex flex-wrap gap-2">
           {challengeSkills.map((cs) => (
-            <img key={cs} src={`./assets/${cs}.png`} height={50} width={50} />
+            <img key={cs} src={`/assets/${cs}.png`} height={50} width={50} />
           ))}
         </div>
       </section>
