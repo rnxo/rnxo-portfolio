@@ -231,6 +231,45 @@ pre code {
   border-color: color-mix(in oklab, var(--lagoon-deep) 35%, var(--line));
 }
 
+.showcase-card {
+  isolation: isolate;
+}
+
+.flip-card {
+  perspective: 1600px;
+}
+
+.flip-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-face-back {
+  transform: rotateY(180deg);
+}
+
+.curtain-panel {
+  height: 100%;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  will-change: transform;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--lagoon-deep) 88%, var(--surface-strong) 12%),
+    color-mix(in oklab, var(--sea-ink) 90%, var(--surface-strong) 10%)
+  );
+}
+
+.curtain-panel:not(:last-child) {
+  margin-right: -1px;
+}
+
 .demo-page {
   width: min(1080px, calc(100% - 2rem));
   margin-inline: auto;
