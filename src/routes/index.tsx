@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import FlipCard from '#/components/about-me/FlipCard'
 import ProjectShowcase from '#/components/about-me/ProjectShowcase'
-import type { Project } from '#/components/about-me/ProjectShowcase'
+import { projects } from '#/components/about-me/project'
 import { getIntroCodeHtml } from '#/server/about.functions'
 import ScrambleText from '#/components/about-me/ScrambleText'
+import ProjectCard from '#/components/about-me/ProjectCard'
 
 export const Route = createFileRoute('/')({
   loader: () => getIntroCodeHtml(),
@@ -24,30 +25,6 @@ const skills = [
 ]
 
 const challengeSkills = ['hono', 'nodejs', 'expo']
-
-const projects: Project[] = [
-  {
-    name: 'todo-app-vite',
-    description:
-      '私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。私が初めて開発アプリで、React と Vite で構築したシンプルなタスク管理アプリ。',
-    url: `${GITHUB_URL}/todo-app-vite`,
-    techs: ['JavaScript', 'vite'],
-  },
-  {
-    name: 'コンビニトイレマップ (Hackathon)',
-    description:
-      '周辺のコンビニのトイレの有無と詳細を共有・閲覧できる便利アプリ',
-    url: 'https://github.com/Neptune-Progate-Hackathon-AWS/front',
-    techs: ['TypeScript', 'Vite+', 'AWS'],
-  },
-  {
-    name: 'Lumi',
-    description:
-      'AI搭載型のペットがユーザに最適化されたアドバイスによって習慣化をサポート!!',
-    url: 'https://github.com/lumi-app-project',
-    techs: ['TypeScript', 'Next.js', 'Supabase'],
-  },
-]
 
 function About() {
   const introCodeHtml = Route.useLoaderData()
@@ -119,12 +96,24 @@ function About() {
           </div>
         }
       />
-      <section className="mt-10">
-        <h2 className="my-5 font-mechanic text-lagoon-deep text-3xl">
+      <section className="flex flex-col my-10 items-center justify-center gap-6">
+        <h2 className="font-mechanic text-lagoon-deep text-3xl">
           <ScrambleText text="PROJECTS" speed={60} />
         </h2>
         {/* プロジェクトショーケース(1枚の循環カード) */}
-        <ProjectShowcase projects={projects} />
+        {/* <ProjectShowcase projects={projects} /> */}
+        <div className="grid grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <ProjectCard
+              name={project.name}
+              devPeriod={project.devPeriod}
+              img={project.img}
+              description={project.description}
+              url={project.url}
+              techs={project.techs}
+            />
+          ))}
+        </div>
       </section>
     </main>
   )

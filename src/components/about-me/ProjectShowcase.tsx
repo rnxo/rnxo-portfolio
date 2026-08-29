@@ -1,13 +1,7 @@
 import { useRef, useState } from 'react'
 import { useAnimate, stagger } from 'motion/react'
 import ProjectCard from '#/components/about-me/ProjectCard'
-
-export type Project = {
-  name: string
-  description: string
-  url: string
-  techs?: string[]
-}
+import type { Project } from './project'
 
 const PANEL_COUNT = 6
 const PANEL_SELECTOR = '.curtain-panel'
@@ -74,7 +68,7 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
       aria-label="クリックで次のプロジェクトを表示"
       onClick={handleCycle}
       onKeyDown={handleKeyDown}
-      className="showcase-card feature-card rise-in relative min-h-screen cursor-pointer overflow-hidden rounded-2xl border p-6 sm:min-h-[300px] sm:p-8"
+      className="showcase-card feature-card rise-in relative flex min-h-115 w-full max-w-100 cursor-pointer flex-col overflow-hidden rounded-2xl border p-4 sm:p-5"
     >
       <div
         className="pointer-events-none absolute inset-0 z-20 flex"
@@ -85,12 +79,14 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
         ))}
       </div>
 
-      <div className="relative z-10 flex h-full flex-col">
+      <div className="relative z-10 flex w-full flex-1 flex-col">
         <ProjectCard
-          name={current.name}
-          description={current.description}
-          url={current.url}
-          techs={current.techs}
+              name={current.name}
+              devPeriod={current.devPeriod}
+              img={current.img}
+              description={current.description}
+              url={current.url}
+              techs={current.techs}
         />
       </div>
     </div>

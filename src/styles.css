@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
 @import 'tailwindcss';
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 @import '@fontsource/allura';
 @import '@fontsource/bitcount-single';
 @import '@fontsource/orbitron';
@@ -233,6 +233,27 @@ pre code {
 
 .showcase-card {
   isolation: isolate;
+}
+
+/* プロジェクトカードのサムネイル枠(中に <img> を入れると全面に表示される) */
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  border: 1px solid var(--line);
+  background: linear-gradient(
+    165deg,
+    color-mix(in oklab, var(--surface-strong) 90%, var(--lagoon-deep) 10%),
+    var(--surface)
+  );
+}
+
+.project-thumb > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .flip-card {
