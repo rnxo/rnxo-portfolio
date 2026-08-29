@@ -1,4 +1,6 @@
-import { useState, type ChangeEvent } from 'react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useServerFn } from '@tanstack/react-start'
+import { sendContactMessage } from '#/server/contact.functions'
 
 type ContactFields = {
   name: string
@@ -6,24 +8,54 @@ type ContactFields = {
   message: string
 }
 
+type InputStatus = 'idle' | 'sending' | 'sent'
+
 const initialFields: ContactFields = { name: '', email: '', message: '' }
 
 export function ContactForm() {
+  const sendContact = useServerFn(sendContactMessage)
   const [fields, setFields] = useState<ContactFields>(initialFields)
+  const [status, setStatus] = useState<InputStatus>('idle')
+  const [error, setError] = useState('')
 
   const handleChange =
     (key: keyof ContactFields) =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setFields((prev) => ({ ...prev, [key]: e.target.value }))
 
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setError('')
+    setStatus('sending')
+
+    try {
+      await sendContact({ data: fields })
+      setStatus('sent')
+      setFields(initialFields)
+    } catch {
+      setStatus('idle')
+      setError('FAIL TO SEND MESSAGE. WAIT A FEW MINUTES AND TRY AGAIN')
+    }
+  }
+
   return (
     <div className="island-shell rise-in mx-auto flex min-h-100 w-full max-w-2xl flex-col rounded-2xl">
       <form
         className="flex w-full flex-1 flex-col p-10"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit}
       >
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
+            {status === 'sent' && (
+              <div className="demo-alert mb-4 text-sm">
+                送信しました。返信をお待ちください。
+              </div>
+            )}
+            {error && (
+              <div className="demo-alert demo-alert-danger mb-4 text-sm">
+                {error}
+              </div>
+            )}
             <label htmlFor="contact-name" className="island-kicker text-start">
               NAME
             </label>
@@ -67,6 +99,8 @@ export function ContactForm() {
               name="message"
               className="demo-textarea"
               placeholder="ご用件をお書きください"
+              required
+              minLength={10}
               value={fields.message}
               onChange={handleChange('message')}
             />
@@ -76,9 +110,10 @@ export function ContactForm() {
         <div className="mt-auto flex flex-col items-center justify-center pt-8">
           <button
             type="submit"
+            disabled={status === 'sending'}
             className="demo-button font-mechanic tracking-[0.16em]"
           >
-            SEND
+            {status === 'sending' ? 'SENDING…' : 'SEND'}
           </button>
         </div>
       </form>

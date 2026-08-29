@@ -22,4 +22,10 @@
       "bucket_name": "my-dev-arcticle-media",
     },
   ],
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "kcinritz@gmail.com"
+    },
+  ]
 }
