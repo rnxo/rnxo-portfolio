@@ -41,11 +41,7 @@ async function getHmacKey(): Promise<CryptoKey> {
 async function signToken(payload: { exp: number }): Promise<string> {
   const key = await getHmacKey()
   const payloadBytes = new TextEncoder().encode(JSON.stringify(payload))
-  const signature = await crypto.subtle.sign(
-    'HMAC',
-    key,
-    payloadBytes,
-  )
+  const signature = await crypto.subtle.sign('HMAC', key, payloadBytes)
   return `${base64UrlEncode(payloadBytes)}.${base64UrlEncode(new Uint8Array(signature))}`
 }
 

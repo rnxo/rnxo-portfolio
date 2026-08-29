@@ -27,9 +27,9 @@ export default function ProjectCard({
       <img
         src={img}
         width={300}
-        className="w-full h-40 rounded-xl project-card border"
+        className="project-card h-40 w-full rounded-xl border"
       />
-      <h2 className="mt-5 display-title line-clamp-2 text-xl font-bold text-(--sea-ink) sm:text-2xl">
+      <h2 className="display-title mt-5 line-clamp-2 text-xl font-bold text-(--sea-ink) sm:text-2xl">
         {name}
       </h2>
 
@@ -46,7 +46,7 @@ export default function ProjectCard({
             href={url}
             target="_blank"
             rel="noreferrer"
-            className="hidden rounded-xl p-2 text-var(--sea-ink-soft) transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)] sm:block"
+            className="text-var(--sea-ink-soft) hidden rounded-xl p-2 transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)] sm:block"
           >
             <span className="sr-only">Go to GitHub</span>
             <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">

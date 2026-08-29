@@ -4,9 +4,7 @@
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
-  "routes": [
-    { "pattern": "skyremt.dev", "custom_domain": true},
-  ],
+  "routes": [{ "pattern": "skyremt.dev", "custom_domain": true }],
   "d1_databases": [
     {
       "binding": "DB",
@@ -25,7 +23,7 @@
   "send_email": [
     {
       "name": "EMAIL",
-      "destination_address": "kcinritz@gmail.com"
+      "destination_address": "kcinritz@gmail.com",
     },
-  ]
+  ],
 }

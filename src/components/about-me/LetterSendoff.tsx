@@ -42,7 +42,8 @@ export function LetterSendoff({
       return
     }
 
-    let cancelled = false
+    const controller = new AbortController()
+    const { signal } = controller
 
     async function run() {
       // 1. はがき化
@@ -51,7 +52,7 @@ export function LetterSendoff({
         { opacity: [0, 1], y: [26, 0], rotate: [-9, -3], scale: [0.84, 1] },
         { duration: 0.55, ease: EASE_SOFT },
       )
-      if (cancelled) return
+      signal.throwIfAborted()
 
       // 2. ラック登場(背板・前板が同時に上がってくる)
       await animate(
@@ -59,10 +60,14 @@ export function LetterSendoff({
         { opacity: [0, 1], y: [56, 0] },
         { duration: 0.45, ease: EASE_SOFT },
       )
-      if (cancelled) return
+      signal.throwIfAborted()
 
       // 3'. 投函の反動(await せず 3 と並行)
-      animate(RACK, { rotate: [0, -2.6, 1.7, 0] }, { duration: 0.7, ease: 'easeOut' })
+      animate(
+        RACK,
+        { rotate: [0, -2.6, 1.7, 0] },
+        { duration: 0.7, ease: 'easeOut' },
+      )
 
       // 3. 投函
       await animate(
@@ -70,7 +75,7 @@ export function LetterSendoff({
         { x: -4, y: 132, rotate: -5, scale: 0.6 },
         { duration: 0.55, ease: EASE_SWIFT },
       )
-      if (cancelled) return
+      signal.throwIfAborted()
 
       // 4. 浮上(delay の 0.28 秒が「ラックに刺さったまま止まる」間になる)
       await animate(
@@ -78,11 +83,15 @@ export function LetterSendoff({
         { y: 42, rotate: -8, scale: 0.66 },
         { duration: 0.5, delay: 0.28, ease: EASE_SOFT },
       )
-      if (cancelled) return
+      signal.throwIfAborted()
 
       // 5a/5b. 宛名面を消し、紙の陰影を出す(どちらも await しない)
       animate(FACE, { opacity: 0 }, { duration: 0.28, ease: 'easeIn' })
-      animate(SHADE, { opacity: 1 }, { duration: 0.4, delay: 0.12, ease: 'easeOut' })
+      animate(
+        SHADE,
+        { opacity: 1 },
+        { duration: 0.4, delay: 0.12, ease: 'easeOut' },
+      )
 
       // 5c. 輪郭を紙飛行機に折る
       await animate(
@@ -90,10 +99,14 @@ export function LetterSendoff({
         { clipPath: PLANE_CLIP, rotate: -16, scale: 0.46, y: 26 },
         { duration: 0.6, ease: EASE_SWIFT },
       )
-      if (cancelled) return
+      signal.throwIfAborted()
 
       // 6'. ラック退場(await せず 6 と並行)
-      animate(RACK, { opacity: 0, y: 28 }, { duration: 0.5, delay: 0.25, ease: 'easeIn' })
+      animate(
+        RACK,
+        { opacity: 0, y: 28 },
+        { duration: 0.5, delay: 0.25, ease: 'easeIn' },
+      )
 
       // 6. 飛翔。いったん左に引いてから右上へ抜けて「助走」を作る。
       //    配列の先頭は 5c の終了値と必ず一致させること(ずれると開始時に飛ぶ)
@@ -108,15 +121,18 @@ export function LetterSendoff({
         },
         { duration: 1.15, ease: EASE_SWIFT, times: [0, 0.16, 0.48, 1] },
       )
-      if (cancelled) return
+      signal.throwIfAborted()
 
       onCompleteRef.current()
     }
 
-    run()
+    run().catch((error: unknown) => {
+      // アンマウントによる中断は想定内。それ以外のエラーは握りつぶさない
+      if (!signal.aborted) throw error
+    })
 
     return () => {
-      cancelled = true
+      controller.abort()
     }
   }, [animate])
 

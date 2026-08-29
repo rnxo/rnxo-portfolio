@@ -81,12 +81,12 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
 
       <div className="relative z-10 flex w-full flex-1 flex-col">
         <ProjectCard
-              name={current.name}
-              devPeriod={current.devPeriod}
-              img={current.img}
-              description={current.description}
-              url={current.url}
-              techs={current.techs}
+          name={current.name}
+          devPeriod={current.devPeriod}
+          img={current.img}
+          description={current.description}
+          url={current.url}
+          techs={current.techs}
         />
       </div>
     </div>

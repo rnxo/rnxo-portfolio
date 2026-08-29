@@ -1,7 +1,7 @@
 import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
-import { useState  } from 'react'
-import type {FormEvent} from 'react';
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { getSession, login } from '#/server/auth.functions'
 
 export const Route = createFileRoute('/admin/login')({
