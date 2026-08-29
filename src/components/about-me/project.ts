@@ -12,8 +12,7 @@ export const projects: Project[] = [
     name: 'Stella Beat',
     devPeriod: '2022.12 - 2023.09',
     img: './assets/stella-beat-logo.png',
-    description:
-      'PCで遊べる ©CHUNITHM ライクなリズムゲーム',
+    description: 'PCで遊べる ©CHUNITHM ライクなリズムゲーム',
     url: 'https://github.com/rnxo/Stella-Beat',
     techs: ['Unity'],
   },
@@ -27,14 +26,6 @@ export const projects: Project[] = [
     techs: ['JavaScript', 'vite'],
   },
   {
-    name: 'コンビニトイレマップ',
-    devPeriod: '2026.03',
-    img: './assets/cobini-toilet-map.png',
-    description: 'コンビニのトイレ情報をユーザー間で共有・閲覧できる便利アプリ',
-    url: 'https://github.com/Neptune-Progate-Hackathon-AWS/front',
-    techs: ['TypeScript', 'Vite+', 'AWS'],
-  },
-  {
     name: 'Lumi',
     devPeriod: '2026.02 - 開発中',
     img: './assets/lumi-app-card.png',
@@ -42,5 +33,13 @@ export const projects: Project[] = [
       'AI搭載型のペットがユーザに最適化されたアドバイスによって習慣化をサポート!!',
     url: 'https://github.com/lumi-app-project',
     techs: ['TypeScript', 'Next.js', 'Supabase'],
+  },
+  {
+    name: 'コンビニトイレマップ',
+    devPeriod: '2026.03',
+    img: './assets/cobini-toilet-map.png',
+    description: 'コンビニのトイレ情報をユーザー間で共有・閲覧できる便利アプリ',
+    url: 'https://github.com/Neptune-Progate-Hackathon-AWS/front',
+    techs: ['TypeScript', 'Vite+', 'AWS'],
   },
 ]

@@ -102,7 +102,7 @@ function About() {
         </h2>
         {/* プロジェクトショーケース(1枚の循環カード) */}
         {/* <ProjectShowcase projects={projects} /> */}
-        <div className="grid grid-cols-3 gap-6">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-6">
           {projects.map((project) => (
             <ProjectCard
               name={project.name}
