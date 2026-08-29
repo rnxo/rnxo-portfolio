@@ -5,13 +5,12 @@ import { projects } from '#/components/about-me/project'
 import { getIntroCodeHtml } from '#/server/about.functions'
 import ScrambleText from '#/components/about-me/ScrambleText'
 import ProjectCard from '#/components/about-me/ProjectCard'
+import { ContactForm } from '#/components/about-me/ContactForm'
 
 export const Route = createFileRoute('/')({
   loader: () => getIntroCodeHtml(),
   component: About,
 })
-
-const GITHUB_URL = 'https://github.com/rnxo'
 
 const skills = [
   'html',
@@ -56,7 +55,7 @@ function About() {
               </div>
             </div>
             <p className="island-kicker mt-6 text-right">
-              クリックで技術スタックを表示 ↻
+              クリックでスキルを表示 ↻
             </p>
           </div>
         }
@@ -98,7 +97,7 @@ function About() {
       />
       <section className="flex flex-col my-10 items-center justify-center gap-6">
         <h2 className="font-mechanic text-lagoon-deep text-3xl">
-          <ScrambleText text="PROJECTS" speed={60} />
+          <ScrambleText text="PROJECTS" speed={60} className="underline" />
         </h2>
         {/* プロジェクトショーケース(1枚の循環カード) */}
         {/* <ProjectShowcase projects={projects} /> */}
@@ -114,6 +113,12 @@ function About() {
             />
           ))}
         </div>
+      </section>
+      <section className="flex flex-col items-center justify-center">
+        <h2 className="font-mechanic text-lagoon-deep text-3xl my-5">
+          <ScrambleText text="CONTACT" speed={60} className="underline" />
+        </h2>
+        <ContactForm />
       </section>
     </main>
   )

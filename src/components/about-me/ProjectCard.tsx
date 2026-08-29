@@ -20,14 +20,14 @@ export default function ProjectCard({
   techs,
 }: ProjectCardProps) {
   return (
-    <div className="showcase-card feature-card rise-in relative flex min-h-100 w-full max-w-100 cursor-pointer flex-col overflow-hidden rounded-2xl border p-4 sm:p-5">
+    <div className="showcase-card project-card rise-in relative flex min-h-100 w-full max-w-100 cursor-pointer flex-col overflow-hidden rounded-2xl border p-4 sm:p-5">
       <span className="text-lagoon-deep font-mechanic text-start">
         {devPeriod}
       </span>
       <img
         src={img}
         width={300}
-        className="w-full h-40 rounded-xl border-2 border-lagoon-deep"
+        className="w-full h-40 rounded-xl project-card border"
       />
       <h2 className="mt-5 display-title line-clamp-2 text-xl font-bold text-(--sea-ink) sm:text-2xl">
         {name}
@@ -36,7 +36,7 @@ export default function ProjectCard({
       <p className="demo-muted line-clamp-3 text-sm">{description}</p>
 
       <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-2">
-        <div className="flex flex-wrap justify-start gap-2">
+        <div className="flex flex-wrap justify-start gap-0.5">
           {techs?.map((tech) => (
             <TechTag key={tech} tech={tech} />
           ))}

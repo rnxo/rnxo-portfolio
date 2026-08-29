@@ -214,7 +214,7 @@ pre code {
   backdrop-filter: blur(4px);
 }
 
-.feature-card {
+.project-card {
   background: linear-gradient(
     165deg,
     color-mix(in oklab, var(--surface-strong) 93%, rgb(74, 255, 14) 7%),
@@ -226,7 +226,7 @@ pre code {
     0 4px 14px rgba(23, 41, 58, 0.06);
 }
 
-.feature-card:hover {
+.project-card:hover {
   transform: translateY(-2px);
   border-color: color-mix(in oklab, var(--lagoon-deep) 35%, var(--line));
 }
