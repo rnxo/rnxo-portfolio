@@ -1,6 +1,7 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { use, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useServerFn } from '@tanstack/react-start'
 import { sendContactMessage } from '#/server/contact.functions'
+import { LetterSendoff } from './LetterSendOff'
 
 type ContactFields = {
   name: string
@@ -8,7 +9,7 @@ type ContactFields = {
   message: string
 }
 
-type InputStatus = 'idle' | 'sending' | 'sent'
+type InputStatus = 'idle' | 'sending' | 'sending-off' | 'sent'
 
 const initialFields: ContactFields = { name: '', email: '', message: '' }
 
@@ -16,6 +17,7 @@ export function ContactForm() {
   const sendContact = useServerFn(sendContactMessage)
   const [fields, setFields] = useState<ContactFields>(initialFields)
   const [status, setStatus] = useState<InputStatus>('idle')
+  const [letter, setLetter] = useState<ContactFields>(initialFields)
   const [error, setError] = useState('')
 
   const handleChange =
@@ -30,8 +32,9 @@ export function ContactForm() {
 
     try {
       await sendContact({ data: fields })
-      setStatus('sent')
+      setLetter(fields)
       setFields(initialFields)
+      setStatus('sending-off')
     } catch {
       setStatus('idle')
       setError('FAIL TO SEND MESSAGE. WAIT A FEW MINUTES AND TRY AGAIN')
@@ -39,9 +42,14 @@ export function ContactForm() {
   }
 
   return (
-    <div className="island-shell rise-in mx-auto flex min-h-100 w-full max-w-2xl flex-col rounded-2xl">
+    <div className="island-shell rise-in relative mx-auto flex min-h-100 w-full max-w-2xl flex-col rounded-2xl">
       <form
-        className="flex w-full flex-1 flex-col p-10"
+        className={`flex w-full flex-1 flex-col p-10 transition-opacity duration-500 ${
+          status === 'sending-off'
+            ? 'pointer-events-none opacity-0'
+            : 'opacity-100'
+        }`}
+        inert={status === 'sending-off'}
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col gap-5">
@@ -117,6 +125,19 @@ export function ContactForm() {
           </button>
         </div>
       </form>
+      {status === 'sending-off' && (
+        <LetterSendoff
+          name={letter.name}
+          message={letter.message}
+          onComplete={() => setStatus('sent')}
+        />
+      )}
+      {/* 演出は装飾なので aria-hidden。完了は演出を待たずにここで伝える */}
+      <p role="status" className="sr-only">
+        {status === 'sending-off' || status === 'sent'
+          ? '送信しました。返信をお待ちください。'
+          : ''}
+      </p>
     </div>
   )
 }

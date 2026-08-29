@@ -635,3 +635,126 @@ a {
 :root[data-theme='dark'] .shiki span {
   color: var(--shiki-dark);
 }
+
+/* ===== 送信完了の演出(はがき → レターラック → 紙飛行機) ===== */
+
+/*
+ * 紙とインクの色は light/dark で反転させない。
+ * --sea-ink などのテーマ変数を紙の上の文字に使うと、dark で紙が白いまま
+ * 文字だけ明るくなって読めなくなるため、はがき・手紙・ラックは「物体」として
+ * 固定色で扱う(dark用ブロックへの追記は不要)。
+ */
+:root {
+  --paper: #fdfaf3;
+  --paper-edge: rgba(23, 41, 58, 0.18);
+  --paper-shade: #c9d6e4;
+  --paper-ink: #26415a;
+  --paper-ink-soft: #6d8298;
+  --paper-air-red: #c0392f;
+  --paper-air-blue: #2b5c8a;
+}
+
+.sendoff-postcard {
+  position: relative;
+  width: min(17.5rem, 76%);
+  aspect-ratio: 8 / 5;
+  /* ラックの真上に浮かせるための初期オフセット。ラック高さ(約132px)より大きくする */
+  margin-bottom: 11.5rem;
+  border-radius: 2px;
+  background: var(--paper);
+  box-shadow:
+    0 1px 0 var(--paper-edge),
+    0 18px 34px -18px rgba(9, 24, 38, 0.55);
+  opacity: 0;
+  /* 紙飛行機へのモーフはこの4頂点を補間する。頂点数と単位(%)を変えないこと */
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: transform, clip-path;
+}
+
+/* AIR MAIL の赤青ストライプ枠(mask-composite でリング状に抜く) */
+.sendoff-postcard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 5px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--paper-air-red) 0 6px,
+    transparent 6px 12px,
+    var(--paper-air-blue) 12px 18px,
+    transparent 18px 24px
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.sendoff-postcard-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.9rem 1rem;
+  color: var(--paper-ink);
+}
+
+/* 紙飛行機の陰影。上半分=表、下半分=影。::after が折り線 */
+.sendoff-plane-shade {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    #fffdf7 0%,
+    var(--paper) 49.9%,
+    var(--paper-shade) 50.1%,
+    #aebfd2 100%
+  );
+  pointer-events: none;
+}
+
+.sendoff-plane-shade::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(23, 41, 58, 0.28);
+}
+
+.sendoff-postmark {
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  border: 1.5px dashed #a4483c;
+  border-radius: 50%;
+  color: #a4483c;
+  line-height: 1.15;
+  transform: rotate(-12deg);
+}
+
+.sendoff-rule {
+  height: 1px;
+  opacity: 0.5;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--paper-ink-soft) 0 4px,
+    transparent 4px 8px
+  );
+}
+
+/*
+ * 背板と前板の両方に付ける。animate('.sendoff-rack', ...) の1回の呼び出しで
+ * 2層に同じアニメーションがかかり、transform-origin も揃うので完全に同期する
+ */
+.sendoff-rack {
+  transform-origin: 50% 100%;
+  opacity: 0;
+}
