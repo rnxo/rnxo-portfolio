@@ -61,10 +61,10 @@ function About() {
         }
         back={
           <div className="island-shell rounded-2xl p-6 sm:p-8">
-            <h2 className="my-5 font-mechanic text-lagoon-deep text-3xl">
+            <h2 className="text-center my-5 font-mechanic text-lagoon-deep text-3xl">
               <ScrambleText text="SKILLS" speed={60} />
             </h2>
-            <div className="flex flex-wrap gap-10">
+            <div className="flex flex-col min-[375px]:grid min-[375px]:grid-cols-3 lg:grid-cols-5 gap-10">
               {skills.map((skill) => (
                 <div
                   key={skill}
@@ -75,10 +75,10 @@ function About() {
                 </div>
               ))}
             </div>
-            <h2 className="my-5 font-mechanic text-lagoon-deep text-3xl">
+            <h2 className="text-center my-5 font-mechanic text-lagoon-deep text-3xl">
               <ScrambleText text="LEARNING" speed={60} />
             </h2>
-            <div className="flex flex-wrap gap-10">
+            <div className="flex flex-col min-[375px]:grid min-[375px]:grid-cols-3 lg:grid-cols-5 gap-10">
               {challengeSkills.map((cs) => (
                 <div
                   key={cs}
