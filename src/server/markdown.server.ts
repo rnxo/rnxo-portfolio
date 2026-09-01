@@ -39,6 +39,8 @@ import langDockerfile from '@shikijs/langs/dockerfile'
 import langDiff from '@shikijs/langs/diff'
 import langGraphql from '@shikijs/langs/graphql'
 import langToml from '@shikijs/langs/toml'
+import { visit } from 'unist-util-visit'
+import type { Code, Root } from 'mdast'
 
 // Cloudflare Workersのバンドルサイズを抑えるため、shikiは"full bundle"(全言語)ではなく
 // createHighlighterCore + 個別言語importの構成にしている。JS正規表現エンジンを使い、
@@ -85,12 +87,34 @@ function getHighlighter() {
   return highlighterPromise
 }
 
+// Zenn記法の ```ts:Button.tsx / ```ts: Button.tsx に対応する。
+// CommonMarkのinfo stringは最初の空白までがlangになるため、素のままだと
+// lang が "ts:Button.tsx" や "ts:" になりShikiが言語を解決できず、
+// fallbackLanguage(plaintext)に落ちてハイライトが効かなくなる。
+// ここで言語とファイル名を分離し、ファイル名はmetaへ退避しておく。
+function remarkCodeFilename() {
+  return (tree: Root) => {
+    visit(tree, 'code', (node: Code) => {
+      if (!node.lang) return
+      const colon = node.lang.indexOf(':')
+      if (colon === -1) return
+
+      const filename = node.lang.slice(colon + 1).trim()
+      const lang = node.lang.slice(0, colon).trim()
+
+      node.lang = lang || null
+      node.meta = [filename, node.meta].filter(Boolean).join(' ').trim() || null
+    })
+  }
+}
+
 export async function renderMarkdownToHtml(markdown: string): Promise<string> {
   const highlighter = await getHighlighter()
 
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkCodeFilename)
     .use(remarkRehype)
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings, { behavior: 'wrap' })

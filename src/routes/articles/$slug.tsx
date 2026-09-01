@@ -38,7 +38,7 @@ function ArticlePage() {
   const headings = extractHeadings(article.body)
 
   return (
-    <main className="page-wrap px-4 py-12">
+    <main className="page-wrap px-4 py-12 bg-color-sea-ink">
       <article>
         <header className="mb-8">
           <p className="island-kicker mb-2">
@@ -57,15 +57,13 @@ function ArticlePage() {
           />
         )}
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_260px]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_260px]">
           <ArticleBody html={article.renderedHtml} />
-          {headings.length > 0 && (
-            <aside>
-              <div className="lg:sticky lg:top-24">
-                <TableOfContents items={headings} />
-              </div>
-            </aside>
-          )}
+          <aside>
+            <div className="hidden lg:block lg:sticky lg:top-24">
+              <TableOfContents items={headings} />
+            </div>
+          </aside>
         </div>
       </article>
     </main>

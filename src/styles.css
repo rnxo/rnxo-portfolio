@@ -16,6 +16,7 @@
 /* アプリ配色用CSS変数 */
 @theme {
   --color-lagoon-deep: var(--lagoon-deep);
+  --color-sea-ink: var(--sea-ink);
 }
 
 .text-mechanic-gradient {
@@ -65,7 +66,7 @@
   --line: rgba(141, 184, 229, 0.18);
   --inset-glint: rgba(194, 224, 247, 0.14);
   --kicker: #b8d4ef;
-  --bg-base: #0a121a;
+  --bg-base: #17293a;
   --header-bg: rgba(10, 18, 26, 0.8);
   --chip-bg: rgba(13, 23, 32, 0.9);
   --chip-line: rgba(141, 184, 229, 0.24);
@@ -88,7 +89,7 @@
     --line: rgba(141, 184, 229, 0.18);
     --inset-glint: rgba(194, 224, 247, 0.14);
     --kicker: #b8d4ef;
-    --bg-base: #0a121a;
+    --bg-base: #17293a;
     --header-bg: rgba(10, 18, 26, 0.8);
     --chip-bg: rgba(13, 23, 32, 0.9);
     --chip-line: rgba(141, 184, 229, 0.24);
@@ -112,59 +113,13 @@ body {
   margin: 0;
   color: var(--sea-ink);
   font-family: var(--font-sans);
+  /* 背景はグラデーションを使わず単一色にする。body の背景はキャンバスに伝播し
+     ドキュメント全高に引き伸ばされるため、グラデーションだと記事ページのような
+     縦長ページだけファーストビューの明るさが変わってしまう。 */
   background-color: var(--bg-base);
-  background:
-    radial-gradient(1100px 620px at -8% -10%, var(--hero-a), transparent 58%),
-    radial-gradient(1050px 620px at 112% -12%, var(--hero-b), transparent 62%),
-    radial-gradient(
-      720px 380px at 50% 115%,
-      rgba(79, 138, 184, 0.1),
-      transparent 68%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--sand) 68%, white) 0%,
-      var(--foam) 44%,
-      var(--bg-base) 100%
-    );
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.28;
-  background:
-    radial-gradient(
-      circle at 20% 15%,
-      rgba(255, 255, 255, 0.8),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 78% 26%,
-      rgba(79, 138, 184, 0.2),
-      transparent 42%
-    ),
-    radial-gradient(circle at 42% 82%, rgba(47, 90, 138, 0.14), transparent 36%);
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.14;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: radial-gradient(circle at 50% 30%, black, transparent 78%);
 }
 
 a {
@@ -588,6 +543,18 @@ a {
 
 .article-prose :where(strong) {
   color: var(--sea-ink);
+}
+
+/* @tailwindcss/typographyのインラインcodeは --tw-prose-code が固定色で
+   light/darkに連動しないため、ダークモードで暗い背景に暗い文字が乗って見づらくなる。
+   サイトのテーマ変数で上書きする(pre内のcodeはShikiが色を持つので対象外)。 */
+.article-prose :where(code):not(pre code) {
+  color: var(--sea-ink);
+}
+
+.article-prose :where(code):not(pre code)::before,
+.article-prose :where(code):not(pre code)::after {
+  content: none;
 }
 
 .article-prose :where(blockquote) {
